@@ -10,6 +10,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <ui:import type="css" link="/css/bootstrap.min.css"/>
+  <ui:import type="css" link="/css/font-awesome.min.css"/>
   <ui:import type="css" link="/css/app.css"/>
   <c:if test="${not empty title}">
     <title>${title}</title>
@@ -21,6 +22,7 @@
   <jsp:doBody/>
 </div>
   <ui:import type="js" link="/js/jquery-3.3.1.slim.min.js"/>
+  <ui:import type="js" link="/js/jquery.mask.min.js"/>
 <ui:import type="js" link="/js/popper.min.js"/>
 <ui:import type="js" link="/js/bootstrap.min.js"/>
 <ui:import type="js" link="/js/app.js"/>

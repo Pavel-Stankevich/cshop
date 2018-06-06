@@ -1,6 +1,7 @@
 package by.vstu.cshop.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +20,7 @@ import java.util.List;
 public class Person {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -27,9 +29,9 @@ public class Person {
     @Column(nullable = false)
     private String surname;
 
-    @Column(nullable = false)
     private String patronymic;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private Date birthday;
 

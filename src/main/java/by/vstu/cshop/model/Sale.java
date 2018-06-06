@@ -8,10 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.List;
 public class Sale {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -39,7 +41,6 @@ public class Sale {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<SaleProduct> products;
-
 
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)

@@ -1,0 +1,11 @@
+html, body {
+  height: 100%;
+}
+
+form.login-form {
+  padding-top: 25vh;
+}
+
+form.registration-form {
+  padding-top: 10vh;
+}

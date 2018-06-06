@@ -2,6 +2,7 @@ package by.vstu.cshop.model;
 
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,8 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Data
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -35,6 +36,6 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Person person;
 }
