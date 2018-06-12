@@ -16,15 +16,20 @@
     <title>${title}</title>
   </c:if>
 </head>
-<body>
+<body class="bg-light">
 <ui:navbar/>
-<div class="container-fluid">
+<div class="container bg-white">
   <jsp:doBody/>
 </div>
-  <ui:import type="js" link="/js/jquery-3.3.1.slim.min.js"/>
-  <ui:import type="js" link="/js/jquery.mask.min.js"/>
+<footer class="footer bg-info text-white-50">
+  <div class="container">
+    <span>Place sticky footer content here.</span>
+  </div>
+</footer>
+<ui:import type="js" link="/js/jquery-3.3.1.min.js"/>
 <ui:import type="js" link="/js/popper.min.js"/>
 <ui:import type="js" link="/js/bootstrap.min.js"/>
+<ui:import type="js" link="/js/jquery.mask.min.js"/>
 <ui:import type="js" link="/js/app.js"/>
 </body>
 </html>

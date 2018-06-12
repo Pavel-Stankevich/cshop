@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Data
@@ -33,7 +32,7 @@ public class User {
     private boolean confirm;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(nullable = false)
+    @Column(name = "role_id", nullable = false)
     private Role role;
 
     @ManyToOne(cascade = CascadeType.ALL)

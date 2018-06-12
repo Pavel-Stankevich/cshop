@@ -31,7 +31,7 @@ public class Address {
     private String city;
 
     @Column(nullable = false)
-    private String address;
+    private String adds;
 
     @Column(nullable = false)
     private String postcode;

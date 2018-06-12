@@ -3,13 +3,13 @@ package by.vstu.cshop.model;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
@@ -38,6 +38,6 @@ public class Person {
     @Column(nullable = false)
     private String phoneNumber;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Address> addresses;
 }

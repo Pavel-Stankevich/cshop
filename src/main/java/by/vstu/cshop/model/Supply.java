@@ -1,5 +1,6 @@
 package by.vstu.cshop.model;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -9,9 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -30,15 +30,22 @@ public class Supply {
     @JoinColumn(nullable = false)
     private Product product;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigInteger supplyPrice;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User merchant;
 
     @Column(nullable = false, precision = 10, scale = 2)
-    private BigInteger price;
+    private BigDecimal supplyPrice;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
 
     @Column(nullable = false)
     private Integer count;
 
     @Column(nullable = false)
     private Integer balance;
+
+    @Column(nullable = false)
+    private boolean close;
 }

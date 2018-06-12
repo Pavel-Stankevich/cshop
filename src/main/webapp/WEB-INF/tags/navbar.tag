@@ -15,16 +15,44 @@
       </ul>
       <form class="form-inline navbar-nav">
         <sec:authorize access="isAnonymous()">
-          <div class="dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a href="<c:url value="/login"/>" class="nav-link">
+            <ui:icon name="shopping-cart"/> <span class="badge badge-light">0</span>
+          </a>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+          <a href="<c:url value="/shoppingCart.html"/>" class="nav-link">
+            <ui:icon name="shopping-cart"/> <span id="shopping-cart-badge" class="badge badge-light">0</span>
+          </a>
+        </sec:authorize>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <sec:authorize access="isAnonymous()">
               <ui:icon name="sign-in"/>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+              <sec:authentication property="principal.username"/>
+            </sec:authorize>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <sec:authorize access="isAnonymous()">
               <a class="dropdown-item" href="<c:url value="/login"/>">Войти</a>
               <a class="dropdown-item" href="<c:url value="/registration"/>">Регистрация</a>
-            </div>
+            </sec:authorize>
+            <sec:authorize access="hasAuthority('SELLER')">
+              <a class="dropdown-item" href="<c:url value="/seller/sales.html"/>">Продажи</a>
+            </sec:authorize>
+            <sec:authorize access="hasAuthority('MERCHANT')">
+              <a class="dropdown-item" href="<c:url value="/merchant/supplies.html"/>">Поставки</a>
+              <a class="dropdown-item" href="<c:url value="/merchant/providers.html"/>">Поставщики</a>
+              <a class="dropdown-item" href="<c:url value="/merchant/products.html"/>">Товары</a>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+              <a class="dropdown-item" href="<c:url value="/shoppingCart.html"/>">Корзина</a>
+              <a class="dropdown-item" href="<c:url value="/profile.html"/>">Профиль</a>
+              <a class="dropdown-item" href="<c:url value="/logout"/>">Выйти</a>
+            </sec:authorize>
           </div>
-        </sec:authorize>
+        </div>
       </form>
     </div>
   </div>

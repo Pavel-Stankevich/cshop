@@ -6,21 +6,14 @@
 <ui:html title="index">
   <c:url var="loginURL" value="/login"/>
   <form:form class="row align-items-center login-form" method="POST" action="${loginURL}">
-    <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1 align-self-center">
+    <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-12 align-self-center">
       <div class="text-center">
         <h3 class="h3 font-weight-normal">CShop - Магазиин компьюиерной техники</h3>
         <h5 class="h5 font-weight-normal">Вход</h5>
       </div>
 
-      <div class="form-group">
-        <label for="inputId">Email</label>
-        <input type="email" id="inputId" name="email" class="form-control" placeholder="Email" required autofocus>
-      </div>
-
-      <div class="form-group">
-        <label for="inputPassword">Пароль</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
-      </div>
+      <ui:input label="Email" id="email" type="email" required="true" autofocus="true" />
+      <ui:input label="Пароль" id="password" type="password" required="true" />
 
       <button class="btn btn-lg btn-info btn-block" type="submit"><ui:icon name="sign-in"/> Войти</button>
     </div>

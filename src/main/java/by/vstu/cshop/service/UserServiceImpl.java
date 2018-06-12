@@ -20,16 +20,19 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Transactional
     @Override
     public User getUser(final Long id) {
         return userRepository.findById(id).get();
     }
 
+    @Transactional
     @Override
     public User getUserByEmail(final String email) {
         return userRepository.findByEmail(email);
     }
 
+    @Transactional
     @Override
     public List<User> getUsers() {
         return userRepository.findAll();

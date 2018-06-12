@@ -1,59 +1,42 @@
 package by.vstu.cshop.controller;
 
-import by.vstu.cshop.model.Product;
 import by.vstu.cshop.model.Role;
-import by.vstu.cshop.model.User;
-import by.vstu.cshop.repository.ProductRepository;
-import by.vstu.cshop.repository.UserRepository;
+import by.vstu.cshop.service.ProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import sun.misc.IOUtils;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
 
 @Controller
 public class IndexController {
 
     @Autowired
-    UserRepository userRepository;
-    @Autowired
-    ProductRepository productRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    private ProductTypeService productTypeService;
 
     @GetMapping("/startPage.html")
-    public String startPage() {
+    public String startPage(final Authentication auth) {
+        if (auth == null || auth.getAuthorities().isEmpty() || auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.USER.toString()))) {
+            return "redirect:/index.html";
+        }
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.SELLER.toString()))) {
+            return "redirect:/seller/sales.html";
+        }
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MERCHANT.toString()))) {
+            return "redirect:/merchant/supplies.html";
+        }
         return "redirect:/index.html";
     }
 
-    @GetMapping("index.html")
-    public String index() {
-        User user = new User();
-        Random r = new Random();
-        user.setEmail("test" + r.nextInt(100000) + "@vstu.by");
-        user.setPassword(passwordEncoder.encode("test"));
-        user.setConfirm(true);
-        user.setRole(Role.USER);
-        userRepository.save(user);
-        System.out.println(userRepository.findAll());
-        return "index";
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/startPage.html";
     }
 
-    @GetMapping(value = "/productPhoto.html", produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getImageAsByteArray(@RequestParam("id") final Long id) {
-        Optional<Product> product = productRepository.findById(id);
-        return product.map(Product::getImg).orElse(null);
+    @GetMapping("/index.html")
+    public String index(final Model model) {
+        model.addAttribute("productTypes", productTypeService.getProductTypes());
+        return "index";
     }
 }

@@ -28,7 +28,7 @@ public class Sale {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private User seller;
 
     @ManyToOne
@@ -36,7 +36,7 @@ public class Sale {
     private User buyer;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Address address;
 
     @ManyToMany(cascade = CascadeType.ALL)
